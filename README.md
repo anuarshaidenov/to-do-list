@@ -1,4 +1,4 @@
-# Project Name
+# To Do List
 
 > One paragraph statement about the project.
 
@@ -42,12 +42,6 @@ To get a local copy up and running follow these simple example steps.
 - GitHub: [@anuarshaidenov](https://github.com/anuarshaidenov)
 - Twitter: [@anuarnyi](https://twitter.com/anuarnyi)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/anuar-shaidenov-365a951b8/)
-
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
 
 ## 🤝 Contributing
 
