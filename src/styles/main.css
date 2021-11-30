@@ -68,8 +68,8 @@ main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.65);
-          box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.65);
+  -webkit-box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.65);
+          box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.65);
   width: 90%;
   max-width: 400px;
 }
@@ -87,18 +87,10 @@ main {
 
 .main-list__item--checked {
   color: var(--color-grey);
-  position: relative;
 }
 
-.main-list__item--checked::after {
-  position: absolute;
-  top: 50%;
-  left: 2%;
-  content: '';
-  width: 80%;
-  height: 1.5px;
-  border-radius: 5px;
-  background-color: var(--color-grey);
+.main-list__item--checked label {
+  text-decoration: line-through;
 }
 
 .main-list__add {

@@ -13,17 +13,9 @@
 
     &--checked {
       color: var(--color-grey);
-      position: relative;
 
-      &::after {
-        position: absolute;
-        top: 50%;
-        left: 2%;
-        content: '';
-        width: 80%;
-        height: 1.5px;
-        border-radius: 5px;
-        background-color: var(--color-grey);
+      label {
+        text-decoration: line-through;
       }
     }
   }
