@@ -22,6 +22,7 @@ const tasks = [
 ];
 
 function displayList() {
+  tasks.sort((a, b) => a.index - b.index);
   tasks.forEach((task) => {
     const markup = `
         <li class="main-list__item ${
