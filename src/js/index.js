@@ -45,4 +45,6 @@ addForm.addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
-displayList();
+window.addEventListener('load', () => {
+  displayList();
+});
