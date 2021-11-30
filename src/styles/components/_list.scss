@@ -34,4 +34,9 @@
       background-color: transparent;
     }
   }
+
+  &__label {
+    display: flex;
+    align-items: center;
+  }
 }

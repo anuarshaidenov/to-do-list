@@ -29,7 +29,7 @@ function displayList() {
   task.completed ? 'main-list__item--checked' : ''
 }">
             
-            <label for="to-do-${task.index}"><input type="checkbox" ${
+            <label class="main-list__label" for="to-do-${task.index}"><input type="checkbox" ${
   task.completed ? 'checked' : ''
 } class='main-list__checkbox' name="to-do-${task.index}" id="to-do-${
   task.index
