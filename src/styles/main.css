@@ -104,10 +104,6 @@ main {
   margin-right: 0.8rem;
 }
 
-.main-list__checkbox:checked {
-  background-color: transparent;
-}
-
 .main-list__label {
   display: -webkit-box;
   display: -ms-flexbox;
