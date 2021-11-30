@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap");
+:root {
+  --color-grey: rgb(184, 184, 184);
+}
+
 *,
 *::after,
 *::before {
@@ -7,8 +12,9 @@
   padding: 0;
 }
 
-body {
-  background-color: bisque;
+body,
+html {
+  font-family: 'Roboto', sans-serif;
 }
 
 img {
@@ -24,6 +30,13 @@ a {
   color: inherit;
 }
 
+main {
+  min-height: 100vh;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
 .hidden {
   display: none;
 }
@@ -32,5 +45,75 @@ a {
   width: 90%;
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+}
+
+.btn-clear {
+  padding: 1rem;
+}
+
+.btn-action {
+  background-color: transparent;
+}
+
+.main-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.65);
+          box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.65);
+  width: 90%;
+  max-width: 400px;
+}
+
+.main-list__item {
+  padding: 0.7rem;
+  border-bottom: 1px solid #eee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.main-list__item--checked {
+  color: var(--color-grey);
+}
+
+.main-list__item--checked label {
+  text-decoration: line-through;
+}
+
+.main-list__add {
+  font-style: italic;
+  outline: none;
+  border: none;
+  width: 100%;
+}
+
+.main-list__checkbox {
+  margin-right: 0.8rem;
+}
+
+.main-list__checkbox:checked {
+  background-color: transparent;
+}
+
+.main-list__label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=main.css.map */
