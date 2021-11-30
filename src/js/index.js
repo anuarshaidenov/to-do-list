@@ -25,14 +25,14 @@ function displayList() {
   tasks.forEach((task) => {
     const markup = `
         <li class="main-list__item ${
-          task.completed ? 'main-list__item--checked' : ''
-        }">
+  task.completed ? 'main-list__item--checked' : ''
+}">
             
             <label for="to-do-${task.index}"><input type="checkbox" ${
-      task.completed ? 'checked' : ''
-    } class='main-list__checkbox' name="to-do-${task.index}" id="to-do-${
-      task.index
-    }" />${task.description}</label>
+  task.completed ? 'checked' : ''
+} class='main-list__checkbox' name="to-do-${task.index}" id="to-do-${
+  task.index
+}" />${task.description}</label>
     <button class="btn btn-action" type="button"><ion-icon name="ellipsis-vertical-outline"></ion-icon></button>
         </li> 
         `;
