@@ -4,8 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Webpack Exercise</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </head>
   <body>
-    <h1>Hello webpack!</h1>
+    <main>
+      <div class="main-list">
+        <div class="main-list__item"><span>Today's To Do</span> <button type="button" class="btn btn-action"><ion-icon name="refresh-outline"></ion-icon></button></div>
+          <form action="/" class="main-list__item menu-list__form" id="add-form">
+            <input
+              class="main-list__add"
+              type="text"
+              class="main-list__add"
+              placeholder="Add to your list..."
+            />
+            <button type="submit" class="btn btn-action">
+              <ion-icon name="add-outline"></ion-icon>
+            </button>
+          </form>
+        <ul class="main-list__items" id="to-do-list">
+          
+        </ul>
+        <button type="button" class="btn btn-clear">Clear all completed</button>
+      </ul>
+    </main>
   </body>
 </html>

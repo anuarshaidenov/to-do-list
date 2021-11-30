@@ -1,0 +1,41 @@
+.main-list {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.65);
+  width: 90%;
+  max-width: 400px;
+
+  &__item {
+    padding: 0.7rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+
+    &--checked {
+      color: var(--color-grey);
+      position: relative;
+
+      &::after {
+        position: absolute;
+        top: 50%;
+        left: 2%;
+        content: '';
+        width: 80%;
+        height: 1.5px;
+        border-radius: 5px;
+        background-color: var(--color-grey);
+      }
+    }
+  }
+
+  &__add {
+    font-style: italic;
+    outline: none;
+    border: none;
+    width: 100%;
+  }
+
+  &__checkbox {
+    margin-right: 0.8rem;
+  }
+}
