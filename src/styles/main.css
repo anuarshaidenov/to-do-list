@@ -103,4 +103,8 @@ main {
 .main-list__checkbox {
   margin-right: 0.8rem;
 }
+
+.main-list__checkbox:checked {
+  background-color: transparent;
+}
 /*# sourceMappingURL=main.css.map */
