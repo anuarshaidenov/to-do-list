@@ -1,23 +1,9 @@
+import ToDo from './toDo.js';
+
 const toDoListEl = document.getElementById('to-do-list');
 
 class ToDoList {
-  #tasks = JSON.parse(localStorage.getItem('tasks')) || [
-    {
-      description: 'wash the dishes',
-      completed: false,
-      index: 5,
-    },
-    {
-      description: 'complete To Do List project',
-      completed: false,
-      index: 2,
-    },
-    {
-      description: 'shower',
-      completed: true,
-      index: 3,
-    },
-  ];
+  #tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
   #listEl;
 
@@ -37,6 +23,13 @@ class ToDoList {
     } else {
       itemToChange.completed = false;
     }
+    this.#storeData();
+    this.#displayList();
+  }
+
+  addTask(task) {
+    const newTask = new ToDo(task, this.#tasks.length);
+    this.#tasks.push(newTask);
     this.#storeData();
     this.#displayList();
   }
