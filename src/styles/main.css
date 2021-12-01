@@ -85,11 +85,8 @@ main {
           justify-content: space-between;
 }
 
-.main-list__item--checked {
+.main-list__item--checked input {
   color: var(--color-grey);
-}
-
-.main-list__item--checked label {
   text-decoration: line-through;
 }
 
@@ -111,5 +108,16 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 80%;
+}
+
+.main-list__description {
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.main-list__description:focus {
+  background-color: rgba(224, 247, 144, 0.5);
 }
 /*# sourceMappingURL=main.css.map */

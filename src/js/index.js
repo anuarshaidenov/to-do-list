@@ -1,13 +1,10 @@
 import toDoList from './listView.js';
 import '../styles/main.css';
+import addHandler from './crud.js';
 
 const addForm = document.getElementById('add-form');
-const addInput = document.getElementById('add-input');
 
-addForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  toDoList.addTask(addInput.value);
-});
+addForm.addEventListener('submit', addHandler);
 
 window.addEventListener('load', () => {
   toDoList.init();
