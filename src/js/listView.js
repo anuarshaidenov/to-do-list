@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable class-methods-use-this */
 import ToDo from './toDo.js';
 
 const toDoListEl = document.getElementById('to-do-list');
@@ -15,9 +17,13 @@ class ToDoList {
     localStorage.setItem('tasks', JSON.stringify(this.#tasks));
   }
 
-  updateTaskStatus(task) {
+  #getItemToChange(task) {
     const { index } = task.dataset;
-    const itemToChange = this.#tasks.find((item) => item.index === +index);
+    return this.#tasks.find((item) => item.index === +index);
+  }
+
+  updateTaskStatus(task) {
+    const itemToChange = this.#getItemToChange(task);
     if (task.checked) {
       itemToChange.completed = true;
     } else {
@@ -28,8 +34,7 @@ class ToDoList {
   }
 
   updateTaskDescription(task) {
-    const { index } = task.dataset;
-    const itemToChange = this.#tasks.find((item) => item.index === +index);
+    const itemToChange = this.#getItemToChange(task);
     itemToChange.description = task.value;
     this.#storeData();
     this.#displayList();
@@ -42,39 +47,70 @@ class ToDoList {
     this.#displayList();
   }
 
+  deleteTask(itemToDelete) {
+    this.#tasks = this.#tasks.filter((item) => item !== itemToDelete);
+    for (let i = 0; i < this.#tasks.length; i += 1) {
+      this.#tasks[i].index = i;
+    }
+    this.#storeData();
+    this.#displayList();
+  }
+
+  #generateMarkup(task) {
+    return `
+    <li
+    class="
+      main-list__item ${task.completed ? 'main-list__item--checked' : ''}"
+  >
+    <label
+      class="main-list__label"
+      ><input type="checkbox" data-index="${task.index}" ${
+      task.completed ? 'checked' : ''
+    } class='main-list__checkbox'
+      name="to-do-${
+        task.index
+      }"/><input type="text" class="main-list__description" data-index="${
+      task.index
+    }" value="${task.description}">
+    </label>
+    <button class="btn btn-action btn-${task.index}" type="button">
+      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+    </button>
+    <button class="btn btn-action btn-delete hidden" data-index="${
+      task.index
+    }" id="${task.index}" type="button">
+      <ion-icon name="trash-outline"></ion-icon>
+    </button>
+  </li>
+        `;
+  }
+
   #displayList() {
     this.#listEl.innerHTML = '';
     this.#tasks.sort((a, b) => a.index - b.index);
     this.#tasks.forEach((task) => {
-      const markup = `
-      <li
-      class="
-        main-list__item ${task.completed ? 'main-list__item--checked' : ''}"
-    >
-      <label
-        class="main-list__label"
-        for="to-do-${task.index}"
-        ><input type="checkbox" data-index="${task.index}" ${
-        task.completed ? 'checked' : ''
-      } class='main-list__checkbox'
-        name="to-do-${task.index}" id="to-do-${
-        task.index
-      }" /><input type="text" class="main-list__description" data-index="${
-        task.index
-      }" value="${task.description}">
-      </label>
-      <button class="btn btn-action" type="button">
-        <ion-icon name="ellipsis-vertical-outline" class="option"></ion-icon>
-        <ion-icon name="trash-outline" class="delete hidden"></ion-icon>
-      </button>
-    </li>
-          `;
+      const markup = this.#generateMarkup(task);
       this.#listEl.insertAdjacentHTML('beforeend', markup);
+    });
+
+    document.querySelectorAll('.btn-delete').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const itemToDelete = this.#getItemToChange(btn);
+        this.deleteTask(itemToDelete);
+      });
     });
 
     document.querySelectorAll('.main-list__description').forEach((item) => {
       item.addEventListener('change', () => {
         this.updateTaskDescription(item);
+      });
+
+      item.addEventListener('focus', () => {
+        const { index } = item.dataset;
+        const btnDel = document.getElementById(index);
+        const btnOption = document.querySelector(`.btn-${index}`);
+        btnOption.classList.add('hidden');
+        btnDel.classList.remove('hidden');
       });
     });
 
