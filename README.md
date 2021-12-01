@@ -35,7 +35,7 @@ After that you will be able to start a local server running the command
 
 `npm start`
 
-You should now see the project running on a dev server with a port 8080.
+You should now see the project running on a dev server with on port 8080.
 
 ## Authors
 
