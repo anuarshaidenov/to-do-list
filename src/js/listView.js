@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
+const toDoListEl = document.getElementById('to-do-list');
+
 class ToDoList {
   #tasks = JSON.parse(localStorage.getItem('tasks')) || [
     {
@@ -41,10 +43,10 @@ class ToDoList {
       itemToChange.completed = false;
     }
     this.#storeData();
-    this.displayList();
+    this.#displayList();
   }
 
-  displayList() {
+  #displayList() {
     this.#listEl.innerHTML = '';
     this.#tasks.sort((a, b) => a.index - b.index);
     this.#tasks.forEach((task) => {
@@ -72,6 +74,12 @@ class ToDoList {
       });
     });
   }
+
+  init() {
+    this.#displayList();
+  }
 }
 
-export default ToDoList;
+const toDoList = new ToDoList(toDoListEl);
+
+export default toDoList;
