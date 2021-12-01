@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 const toDoListEl = document.getElementById('to-do-list');
 
 class ToDoList {
@@ -8,19 +6,16 @@ class ToDoList {
       description: 'wash the dishes',
       completed: false,
       index: 5,
-      id: uuidv4(),
     },
     {
       description: 'complete To Do List project',
       completed: false,
       index: 2,
-      id: uuidv4(),
     },
     {
       description: 'shower',
       completed: true,
       index: 3,
-      id: uuidv4(),
     },
   ];
 
@@ -35,8 +30,8 @@ class ToDoList {
   }
 
   #updateTaskStatus(task) {
-    const { id } = task.dataset;
-    const itemToChange = this.#tasks.find((task) => task.id === id);
+    const { index } = task.dataset;
+    const itemToChange = this.#tasks.find((item) => item.index === +index);
     if (task.checked) {
       itemToChange.completed = true;
     } else {
@@ -57,7 +52,7 @@ class ToDoList {
               
               <label class="main-list__label" for="to-do-${
   task.index
-}"><input type="checkbox" data-id="${task.id}" ${
+}"><input type="checkbox" data-index="${task.index}" ${
   task.completed ? 'checked' : ''
 } class='main-list__checkbox' name="to-do-${task.index}" id="to-do-${
   task.index
