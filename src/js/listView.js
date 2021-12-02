@@ -3,23 +3,28 @@ import ToDo from './toDo.js';
 const toDoListEl = document.getElementById('to-do-list');
 
 class ToDoList {
+  // Initial value for the list: get the data from local storage, empty list otherwise.
   #tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
   #listEl;
 
   constructor(listEl) {
+    // Initialize the list container.
     this.#listEl = listEl;
   }
 
+  // Store the data in local storage.
   #storeData() {
     localStorage.setItem('tasks', JSON.stringify(this.#tasks));
   }
 
+  // Get an item from the list with the index provided.
   #getItemToChange(task) {
     const { index } = task.dataset;
     return this.#tasks.find((item) => item.index === +index);
   }
 
+  // Show the delete button
   static unhideDeleteBtn(item) {
     const { index } = item.dataset;
     const btnDel = document.getElementById(index);
@@ -28,11 +33,13 @@ class ToDoList {
     btnDel.classList.remove('hidden');
   }
 
+  // Store the data in the local storage and display the new list items.
   #storeAndDisplayData() {
     this.#storeData();
     this.#displayList();
   }
 
+  // Update the task status according to the checkbox checked value.
   #updateTaskStatus(task) {
     const itemToChange = this.#getItemToChange(task);
     if (task.checked) {
@@ -43,36 +50,42 @@ class ToDoList {
     this.#storeAndDisplayData();
   }
 
+  // Update task description: handler for the description input change.
   #updateTaskDescription(task) {
     const itemToChange = this.#getItemToChange(task);
     itemToChange.description = task.value;
     this.#storeAndDisplayData();
   }
 
+  // Add a new task. Public method: called when user submits new added task.
   addTask(task) {
     const newTask = new ToDo(task, this.#tasks.length + 1);
     this.#tasks.push(newTask);
     this.#storeAndDisplayData();
   }
 
+  // Arrange the task indexes in acsending order one by one.
   #orderTasks() {
     for (let i = 0; i < this.#tasks.length; i += 1) {
       this.#tasks[i].index = i + 1;
     }
   }
 
+  // Remove task from the list, store and display the data.
   deleteTask(itemToDelete) {
     this.#tasks = this.#tasks.filter((item) => item !== itemToDelete);
     this.#orderTasks();
     this.#storeAndDisplayData();
   }
 
+  // Remove completed tasks from the list, arrange the indexes, store and display the data.
   clearCompletedTasks() {
     this.#tasks = this.#tasks.filter((item) => !item.completed);
     this.#orderTasks();
     this.#storeAndDisplayData();
   }
 
+  // Create a markup for a task.
   static generateMarkup(task) {
     return `
     <li class="main-list__item ${
@@ -99,6 +112,7 @@ class ToDoList {
         `;
   }
 
+  // Display the items in the DOM.
   #displayList() {
     this.#listEl.innerHTML = '';
     this.#tasks.sort((a, b) => a.index - b.index);
@@ -107,8 +121,9 @@ class ToDoList {
       this.#listEl.insertAdjacentHTML('beforeend', markup);
     });
 
-    // Attach event handlers to dynamically created elements
+    // Attach event handlers to dynamically created elements.
 
+    // Remove task on the delete button click event.
     document.querySelectorAll('.btn-delete').forEach((btn) => {
       btn.addEventListener('click', () => {
         const itemToDelete = this.#getItemToChange(btn);
@@ -116,16 +131,19 @@ class ToDoList {
       });
     });
 
+    // Edit a task description on the input change.
     document.querySelectorAll('.main-list__description').forEach((item) => {
       item.addEventListener('change', () => {
         this.#updateTaskDescription(item);
       });
 
+      // Show the delete button on input focus.
       item.addEventListener('focus', () => {
         ToDoList.unhideDeleteBtn(item);
       });
     });
 
+    // Update task status on the checkbox check event.
     document.querySelectorAll('.main-list__checkbox').forEach((item) => {
       item.addEventListener('change', () => {
         this.#updateTaskStatus(item);
@@ -133,6 +151,7 @@ class ToDoList {
     });
   }
 
+  // Initialize the list.
   init() {
     this.#displayList();
   }
