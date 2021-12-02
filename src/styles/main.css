@@ -53,7 +53,13 @@ main {
 }
 
 .btn-clear {
+  color: #000;
   padding: 1rem;
+  font-size: 1rem;
+}
+
+.btn-clear:hover {
+  text-decoration: underline;
 }
 
 .btn-action {
@@ -72,9 +78,11 @@ main {
           box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.65);
   width: 90%;
   max-width: 400px;
+  font-size: 1rem;
 }
 
 .main-list__item {
+  font-size: inherit;
   padding: 0.7rem;
   border-bottom: 1px solid #eee;
   display: -webkit-box;
@@ -85,15 +93,19 @@ main {
           justify-content: space-between;
 }
 
-.main-list__item--checked {
-  color: var(--color-grey);
+@media (min-width: 768px) {
+  .main-list__item {
+    font-size: 0.8rem;
+  }
 }
 
-.main-list__item--checked label {
+.main-list__item--checked input {
+  color: var(--color-grey);
   text-decoration: line-through;
 }
 
 .main-list__add {
+  font-size: inherit;
   font-style: italic;
   outline: none;
   border: none;
@@ -111,5 +123,19 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 80%;
+}
+
+.main-list__description {
+  font-size: inherit;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.main-list__description:focus {
+  background-color: rgba(224, 247, 144, 0.5);
 }
 /*# sourceMappingURL=main.css.map */

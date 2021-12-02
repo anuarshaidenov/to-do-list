@@ -4,23 +4,29 @@
   box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.65);
   width: 90%;
   max-width: 400px;
+  font-size: 1rem;
 
   &__item {
+    font-size: inherit;
     padding: 0.7rem;
     border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
 
-    &--checked {
-      color: var(--color-grey);
+    @media (min-width: 768px) {
+      font-size: 0.8rem;
+    }
 
-      label {
+    &--checked {
+      input {
+        color: var(--color-grey);
         text-decoration: line-through;
       }
     }
   }
 
   &__add {
+    font-size: inherit;
     font-style: italic;
     outline: none;
     border: none;
@@ -34,5 +40,19 @@
   &__label {
     display: flex;
     align-items: center;
+    width: 80%;
+  }
+
+  &__description {
+    font-size: inherit;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    border-radius: 10px;
+
+    &:focus {
+      background-color: rgba(224, 247, 144, 0.5);
+    }
   }
 }
