@@ -4,12 +4,18 @@
   box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.65);
   width: 90%;
   max-width: 400px;
+  font-size: 1rem;
 
   &__item {
+    font-size: inherit;
     padding: 0.7rem;
     border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
+
+    @media (min-width: 768px){
+      font-size: .8rem;
+    }
 
     &--checked {
       input {
@@ -20,6 +26,7 @@
   }
 
   &__add {
+    font-size: inherit;
     font-style: italic;
     outline: none;
     border: none;
@@ -37,6 +44,7 @@
   }
 
   &__description {
+    font-size: inherit;
     width: 100%;
     border: none;
     outline: none;
