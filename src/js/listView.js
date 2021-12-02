@@ -28,6 +28,11 @@ class ToDoList {
     btnDel.classList.remove('hidden');
   }
 
+  #storeAndDisplayData() {
+    this.#storeData();
+    this.#displayList();
+  }
+
   #updateTaskStatus(task) {
     const itemToChange = this.#getItemToChange(task);
     if (task.checked) {
@@ -35,22 +40,19 @@ class ToDoList {
     } else {
       itemToChange.completed = false;
     }
-    this.#storeData();
-    this.#displayList();
+    this.#storeAndDisplayData();
   }
 
   #updateTaskDescription(task) {
     const itemToChange = this.#getItemToChange(task);
     itemToChange.description = task.value;
-    this.#storeData();
-    this.#displayList();
+    this.#storeAndDisplayData();
   }
 
   addTask(task) {
     const newTask = new ToDo(task, this.#tasks.length + 1);
     this.#tasks.push(newTask);
-    this.#storeData();
-    this.#displayList();
+    this.#storeAndDisplayData();
   }
 
   #orderTasks() {
@@ -62,15 +64,13 @@ class ToDoList {
   deleteTask(itemToDelete) {
     this.#tasks = this.#tasks.filter((item) => item !== itemToDelete);
     this.#orderTasks();
-    this.#storeData();
-    this.#displayList();
+    this.#storeAndDisplayData();
   }
 
   clearCompletedTasks() {
     this.#tasks = this.#tasks.filter((item) => !item.completed);
     this.#orderTasks();
-    this.#storeData();
-    this.#displayList();
+    this.#storeAndDisplayData();
   }
 
   static generateMarkup(task) {
