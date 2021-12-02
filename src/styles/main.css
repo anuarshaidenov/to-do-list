@@ -95,7 +95,7 @@ main {
 
 @media (min-width: 768px) {
   .main-list__item {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 }
 
