@@ -31,11 +31,11 @@ To install necessary dependencies run
 
 `npm install`
 
-After that you will be able to start a local server running the command
+Start a local server running the command
 
 `npm start`
 
-You should now see the project running on a dev server with on port 8080.
+You should now have the project running locally on a dev server.
 
 ## Authors
 
