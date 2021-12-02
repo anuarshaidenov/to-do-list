@@ -28,13 +28,16 @@
             class="main-list__add"
             type="text"
             placeholder="Add to your list..."
+            autocomplete="off"
           />
           <button type="submit" class="btn btn-action">
             <ion-icon name="add-outline"></ion-icon>
           </button>
         </form>
         <ul class="main-list__items" id="to-do-list"></ul>
-        <button type="button" class="btn btn-clear">Clear all completed</button>
+        <button type="button" class="btn btn-clear" id="btn-clear">
+          Clear all completed
+        </button>
       </div>
     </main>
   </body>

@@ -2,10 +2,12 @@ import toDoList from './listView.js';
 
 const addInput = document.getElementById('add-input');
 
-const addHandler = (e) => {
+export const addHandler = (e) => {
   e.preventDefault();
   toDoList.addTask(addInput.value);
   addInput.value = '';
 };
 
-export default addHandler;
+export const clearCompletedHandler = () => {
+  toDoList.clearCompletedTasks();
+};

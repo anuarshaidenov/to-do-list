@@ -115,6 +115,8 @@ main {
   width: 100%;
   border: none;
   outline: none;
+  padding: 0.5rem;
+  border-radius: 10px;
 }
 
 .main-list__description:focus {
