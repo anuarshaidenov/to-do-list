@@ -1,5 +1,3 @@
-/* eslint-disable indent */
-/* eslint-disable class-methods-use-this */
 import ToDo from './toDo.js';
 
 const toDoListEl = document.getElementById('to-do-list');
@@ -22,7 +20,7 @@ class ToDoList {
     return this.#tasks.find((item) => item.index === +index);
   }
 
-  #unhideDeleteBtn(item) {
+  static unhideDeleteBtn(item) {
     const { index } = item.dataset;
     const btnDel = document.getElementById(index);
     const btnOption = document.querySelector(`.btn-${index}`);
@@ -75,26 +73,26 @@ class ToDoList {
     this.#displayList();
   }
 
-  #generateMarkup(task) {
+  static generateMarkup(task) {
     return `
     <li class="main-list__item ${
-      task.completed ? 'main-list__item--checked' : ''
-    }">
+  task.completed ? 'main-list__item--checked' : ''
+}">
       <label class="main-list__label"><input type="checkbox" data-index="${
-        task.index
-      }" ${task.completed ? 'checked' : ''} class='main-list__checkbox'
+  task.index
+}" ${task.completed ? 'checked' : ''} class='main-list__checkbox'
         name="to-do-${
-          task.index
-        }"/><input type="text" class="main-list__description" data-index="${
-      task.index
-    }" value="${task.description}">
+  task.index
+}"/><input type="text" class="main-list__description" data-index="${
+  task.index
+}" value="${task.description}">
       </label>
       <button class="btn btn-action btn-${task.index}" type="button">
         <ion-icon name="ellipsis-vertical-outline"></ion-icon>
       </button>
       <button class="btn btn-action btn-delete hidden" data-index="${
-        task.index
-      }" id="${task.index}" type="button">
+  task.index
+}" id="${task.index}" type="button">
         <ion-icon name="trash-outline"></ion-icon>
       </button>
     </li>
@@ -105,7 +103,7 @@ class ToDoList {
     this.#listEl.innerHTML = '';
     this.#tasks.sort((a, b) => a.index - b.index);
     this.#tasks.forEach((task) => {
-      const markup = this.#generateMarkup(task);
+      const markup = ToDoList.generateMarkup(task);
       this.#listEl.insertAdjacentHTML('beforeend', markup);
     });
 
@@ -124,7 +122,7 @@ class ToDoList {
       });
 
       item.addEventListener('focus', () => {
-        this.#unhideDeleteBtn(item);
+        ToDoList.unhideDeleteBtn(item);
       });
     });
 
