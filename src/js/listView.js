@@ -24,13 +24,29 @@ class ToDoList {
     return this.#tasks.find((item) => item.index === +index);
   }
 
-  // Show the delete button
-  static unhideDeleteBtn(item) {
+  static getActionButtons(item) {
     const { index } = item.dataset;
     const btnDel = document.getElementById(index);
     const btnOption = document.querySelector(`.btn-${index}`);
+    return [btnDel, btnOption];
+  }
+
+  // Show the delete button
+  static unhideDeleteBtn(item) {
+    const [btnDel, btnOption] = ToDoList.getActionButtons(item);
     btnOption.classList.add('hidden');
     btnDel.classList.remove('hidden');
+  }
+
+  // Hide the delete button
+  static hideDeleteButton(item) {
+    const [btnDel, btnOption] = ToDoList.getActionButtons(item);
+    // setTimeout(() => {
+    //   btnOption.classList.remove('hidden');
+    //   btnDel.classList.add('hidden');
+    // }, 100);
+    btnOption.classList.remove('hidden');
+    btnDel.classList.add('hidden');
   }
 
   // Store the data in the local storage and display the new list items.
@@ -89,40 +105,30 @@ class ToDoList {
   static generateMarkup(task) {
     return `
     <li class="main-list__item ${
-  task.completed ? 'main-list__item--checked' : ''
-}">
+      task.completed ? 'main-list__item--checked' : ''
+    }">
       <label class="main-list__label"><input type="checkbox" data-index="${
-  task.index
-}" ${task.completed ? 'checked' : ''} class='main-list__checkbox'
+        task.index
+      }" ${task.completed ? 'checked' : ''} class='main-list__checkbox'
         name="to-do-${
-  task.index
-}"/><input type="text" class="main-list__description" data-index="${
-  task.index
-}" value="${task.description}">
+          task.index
+        }"/><input type="text" class="main-list__description" data-index="${
+      task.index
+    }" value="${task.description}">
       </label>
       <button class="btn btn-action btn-${task.index}" type="button">
         <ion-icon name="ellipsis-vertical-outline"></ion-icon>
       </button>
       <button class="btn btn-action btn-delete hidden" data-index="${
-  task.index
-}" id="${task.index}" type="button">
+        task.index
+      }" id="${task.index}" type="button">
         <ion-icon name="trash-outline"></ion-icon>
       </button>
     </li>
         `;
   }
 
-  // Display the items in the DOM.
-  #displayList() {
-    this.#listEl.innerHTML = '';
-    this.#tasks.sort((a, b) => a.index - b.index);
-    this.#tasks.forEach((task) => {
-      const markup = ToDoList.generateMarkup(task);
-      this.#listEl.insertAdjacentHTML('beforeend', markup);
-    });
-
-    // Attach event handlers to dynamically created elements.
-
+  #attachEvents() {
     // Remove task on the delete button click event.
     document.querySelectorAll('.btn-delete').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -141,6 +147,13 @@ class ToDoList {
       item.addEventListener('focus', () => {
         ToDoList.unhideDeleteBtn(item);
       });
+
+      // Hide the delete button on input focusout.
+      item.addEventListener('focusout', (e) => {
+        // If the delete button is clicked return from the function
+        if (e.relatedTarget?.classList.contains('btn-delete')) return;
+        ToDoList.hideDeleteButton(item);
+      });
     });
 
     // Update task status on the checkbox check event.
@@ -149,6 +162,19 @@ class ToDoList {
         this.#updateTaskStatus(item);
       });
     });
+  }
+
+  // Display the items in the DOM.
+  #displayList() {
+    this.#listEl.innerHTML = '';
+    this.#tasks.sort((a, b) => a.index - b.index);
+    this.#tasks.forEach((task) => {
+      const markup = ToDoList.generateMarkup(task);
+      this.#listEl.insertAdjacentHTML('beforeend', markup);
+    });
+
+    // Attach event handlers to the dynamically created elements.
+    this.#attachEvents();
   }
 
   // Initialize the list.
