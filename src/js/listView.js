@@ -25,8 +25,7 @@ class ToDoList {
     return this.#tasks.find((item) => item.index === +index);
   }
 
-  static getActionButtons(item) {
-    const { index } = item.dataset;
+  static getActionButtons(index) {
     const btnDel = document.getElementById(index);
     const btnOption = document.querySelector(`.btn-${index}`);
     return [btnDel, btnOption];
@@ -34,14 +33,14 @@ class ToDoList {
 
   // Show the delete button
   static unhideDeleteBtn(item) {
-    const [btnDel, btnOption] = ToDoList.getActionButtons(item);
+    const [btnDel, btnOption] = ToDoList.getActionButtons(item.dataset.index);
     btnOption.classList.add('hidden');
     btnDel.classList.remove('hidden');
   }
 
   // Hide the delete button
   static hideDeleteButton(item) {
-    const [btnDel, btnOption] = ToDoList.getActionButtons(item);
+    const [btnDel, btnOption] = ToDoList.getActionButtons(item.dataset.index);
     btnOption.classList.remove('hidden');
     btnDel.classList.add('hidden');
   }
