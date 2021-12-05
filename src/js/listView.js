@@ -42,10 +42,6 @@ class ToDoList {
   // Hide the delete button
   static hideDeleteButton(item) {
     const [btnDel, btnOption] = ToDoList.getActionButtons(item);
-    // setTimeout(() => {
-    //   btnOption.classList.remove('hidden');
-    //   btnDel.classList.add('hidden');
-    // }, 100);
     btnOption.classList.remove('hidden');
     btnDel.classList.add('hidden');
   }
@@ -108,14 +104,13 @@ class ToDoList {
     <li class="main-list__item ${
       task.completed ? 'main-list__item--checked' : ''
     }">
-      <label class="main-list__label"><input type="checkbox" data-index="${
-        task.index
-      }" ${task.completed ? 'checked' : ''} class='main-list__checkbox'
-        name="to-do-${
+      <label class="main-list__label">
+        <input type="checkbox" data-index="${task.index}" ${
+      task.completed ? 'checked' : ''
+    } class='main-list__checkbox' name="to-do-${task.index}"/>
+        <input type="text" class="main-list__description" data-index="${
           task.index
-        }"/><input type="text" class="main-list__description" data-index="${
-      task.index
-    }" value="${task.description}">
+        }" value="${task.description}">
       </label>
       <button class="btn btn-action btn-${task.index}" type="button">
         <ion-icon name="ellipsis-vertical-outline"></ion-icon>
@@ -145,7 +140,7 @@ class ToDoList {
       });
 
       // Show the delete button on input focus.
-      item.addEventListener('focus', () => {
+      item.addEventListener('focusin', () => {
         ToDoList.unhideDeleteBtn(item);
       });
 
