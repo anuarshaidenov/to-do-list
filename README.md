@@ -14,7 +14,7 @@
 
 ## Live Demo
 
-[Live Demo Link](https://todo-mcrvrs.netlify.app/)
+[Live Demo Link](https://anuarshaidenov.github.io/to-do-list/dist/)
 
 ## Installation
 
