@@ -76,20 +76,19 @@ class ToDoList {
     for (let i = 0; i < this.#tasks.length; i += 1) {
       this.#tasks[i].index = i + 1;
     }
+    return this;
   }
 
   // Remove task from the list, store and display the data.
   deleteTask(itemToDelete) {
     this.#tasks = this.#tasks.filter((item) => item !== itemToDelete);
-    this.#orderTasks();
-    this.#storeData().#displayList().#attachEvents();
+    this.#orderTasks().#storeData().#displayList().#attachEvents();
   }
 
   // Remove completed tasks from the list, arrange the indexes, store and display the data.
   clearCompletedTasks() {
     this.#tasks = this.#tasks.filter((item) => !item.completed);
-    this.#orderTasks();
-    this.#storeData().#displayList().#attachEvents();
+    this.#orderTasks().#storeData().#displayList().#attachEvents();
   }
 
   // Create a markup for a task.
