@@ -17,6 +17,7 @@ class ToDoList {
   // Store the data in local storage.
   #storeData() {
     localStorage.setItem('tasks', JSON.stringify(this.#tasks));
+    return this;
   }
 
   // Get an item from the list with the index provided.
@@ -45,12 +46,6 @@ class ToDoList {
     btnDel.classList.add('hidden');
   }
 
-  // Store the data in the local storage and display the new list items.
-  #storeAndDisplayData() {
-    this.#storeData();
-    this.#displayList();
-  }
-
   // Update the task status according to the checkbox checked value.
   #updateTaskStatus(task) {
     const itemToChange = this.#getItemToChange(task);
@@ -59,21 +54,21 @@ class ToDoList {
     } else {
       itemToChange.completed = false;
     }
-    this.#storeAndDisplayData();
+    this.#storeData().#displayList().#attachEvents();
   }
 
   // Update task description: handler for the description input change.
   #updateTaskDescription(task) {
     const itemToChange = this.#getItemToChange(task);
     itemToChange.description = task.value;
-    this.#storeAndDisplayData();
+    this.#storeData().#displayList().#attachEvents();
   }
 
   // Add a new task. Public method: called when user submits new added task.
   addTask(task) {
     const newTask = new ToDo(task, this.#tasks.length + 1);
     this.#tasks.push(newTask);
-    this.#storeAndDisplayData();
+    this.#storeData().#displayList().#attachEvents();
   }
 
   // Arrange the task indexes in acsending order one by one.
@@ -87,14 +82,14 @@ class ToDoList {
   deleteTask(itemToDelete) {
     this.#tasks = this.#tasks.filter((item) => item !== itemToDelete);
     this.#orderTasks();
-    this.#storeAndDisplayData();
+    this.#storeData().#displayList().#attachEvents();
   }
 
   // Remove completed tasks from the list, arrange the indexes, store and display the data.
   clearCompletedTasks() {
     this.#tasks = this.#tasks.filter((item) => !item.completed);
     this.#orderTasks();
-    this.#storeAndDisplayData();
+    this.#storeData().#displayList().#attachEvents();
   }
 
   // Create a markup for a task.
@@ -171,13 +166,12 @@ class ToDoList {
       this.#listEl.insertAdjacentHTML('beforeend', markup);
     });
 
-    // Attach event handlers to the dynamically created elements.
-    this.#attachEvents();
+    return this;
   }
 
   // Initialize the list.
   init() {
-    this.#displayList();
+    this.#displayList().#attachEvents();
   }
 }
 
