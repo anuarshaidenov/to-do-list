@@ -161,8 +161,11 @@ class ToDoList {
 
   // Display the items in the DOM.
   #displayList() {
+    // Clear the list before displaying the items
     this.#listEl.innerHTML = '';
+    // Sort the list in ascending order
     this.#tasks.sort((a, b) => a.index - b.index);
+    // Display the items in the DOM
     this.#tasks.forEach((task) => {
       const markup = ToDoList.generateMarkup(task);
       this.#listEl.insertAdjacentHTML('beforeend', markup);
